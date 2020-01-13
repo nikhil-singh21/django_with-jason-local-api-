@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script>
+$(document).ready(function(){ 
+        $(".clickme").click(function(){
+          xmlrequest = new XMLHttpRequest();
+          xmlrequest.open('GET','search/?subject='+$(this).text(),true); 
+
+          xmlrequest.onreadystatechange=function()
+            {
+              if(this.status==200 && this.readyState==4)
+                {
+                  $('#content').text(""); 
+                  var data = JSON.parse(this.responseText);
+                 $('#content').text(data[0]); 
+                  for (i in data)
+                      $('#content').append('<br/>' +data[i]);
+        
+                }
+    
+            }
+      xmlrequest.send(); 
+    });
+   });
+</script>
+<script>
+$(document).ready(function(){ 
+        $(".clickpost").click(function(){
+          xmlrequest = new XMLHttpRequest();
+          xmlrequest.open('GET','http://localhost/getapi',true); 
+
+          xmlrequest.onreadystatechange=function()
+            {
+              if(this.status==200 && this.readyState==4)
+                {
+                  $('#post').text(""); 
+                  var data = JSON.parse(this.responseText);
+                 $('#post').text(data[0]); 
+                  for (i in data)
+                      $('#post').append('<br/>' +data[i]);
+        
+                }
+    
+            }
+      xmlrequest.send(); 
+    });
+   });
+   $(document).ready(function(){ 
+        $(".clickcat").click(function(){
+          xmlrequest = new XMLHttpRequest();
+          xmlrequest.open('GET','http://localhost/get_cat',true); 
+
+          xmlrequest.onreadystatechange=function()
+            {
+              if(this.status==200 && this.readyState==4)
+                {
+                  $('#cat').text(""); 
+                  var data = JSON.parse(this.responseText);
+                 $('#cat').text(data[0]); 
+                  for (i in data)
+                      $('#cat').append('<br/>' +data[i]);
+        
+                }
+    
+            }
+      xmlrequest.send(); 
+    });
+   });
+</script>
+<style>
+ .clickme{
+
+  }
+</style>
+</head>
+<body>
+
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Nikhil Singh</a>
+    </div>
+    <ul class="nav navbar-nav">
+        {% for x,y in menus.items %} 
+       
+        {% if y|length > 0%}
+        
+       <li class="dropdown">
+       <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{x}} <span class="caret"></span></a>
+       <ul class="dropdown-menu">
+       {% for i,j in y.items %}
+          <li><a class = "clickme"  href="#" >{{i}}</a></li>        
+       {% endfor %} 
+       </li>  
+    </ul>
+     {% else %}
+        <li class="active"><a href="#">{{x}}</a>  
+      {% endif %}
+      </li>
+      {% endfor %}
+ </ul>
+  </div>
+</nav>
+<li><a class = "clickpost"  href="#" >show post</a></li> 
+<div class="post" id='post' style ="float:left"></div>
+<li><a class = "clickcat"  href="#" >show  category</a></li> 
+<div class="cat" id='cat' style ="float:left"></div>
+
+<div class='data' id='content'>
+</div>
+
+
+</body>

@@ -1,0 +1,14 @@
+{
+    "home": "",
+    "about":"",   
+    "contact us":"",
+    "courses":
+        {"c":["introduction","data dtructure","control statement","graphics"],
+        "c++":["introduction","data dtructure","control statement","graphics"],
+        "java":["introduction","data dtructure","control statement","graphics"],
+        "kotlin":"",
+        "python":["introduction","data dtructure","control statement","graphics"],
+        "sql":""
+    },
+    "training":{"flask":["deeployment","hosting"],"django":"","android":"","wordpress":""}
+}
